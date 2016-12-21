@@ -1,11 +1,12 @@
-module StringUtils exposing ((+++), (+-+))
+module StringUtils exposing ((+++), (+-+), concatWithSpaces)
 
 {-|
     Some String utils, e.g. better concat
 
-@docs (+++), (+-+)
+@docs (+++), (+-+), concatWithSpaces
 -}
 
+import String
 import Native.StringUtils
 
 
@@ -30,6 +31,13 @@ import Native.StringUtils
 (+-+) : a -> b -> String
 (+-+) a b =
     a +++ " " +++ b
+
+
+{-| helper for creating other operators
+-}
+concatWithSpaces : Int -> a -> b -> String
+concatWithSpaces count a b =
+    a +++ (String.repeat count " ") +++ b
 
 
 {-| test for string

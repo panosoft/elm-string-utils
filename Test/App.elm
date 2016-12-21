@@ -4,6 +4,11 @@ import Html exposing (div, text, Html)
 import StringUtils exposing (..)
 
 
+(+--+) : a -> b -> String
+(+--+) =
+    concatWithSpaces 2
+
+
 main : Html a
 main =
     let
@@ -13,19 +18,18 @@ main =
         goodbye =
             "Goodbye Cruel World!!" +-+ ( 1, 2 ) +-+ { x = [ 3, 4 ], y = "abc" }
 
+        hello2 =
+            "Hello World" +--+ "!! " +--+ ( 1, 2 ) +--+ { x = [ 3, 4 ], y = "abc" }
+
         l =
             let
                 ll =
                     Debug.log "hello" hello
             in
-                Debug.log "goodbye" goodbye
+                let
+                    lll =
+                        Debug.log "hello2" hello2
+                in
+                    Debug.log "goodbye" goodbye
     in
-        div []
-            [ div []
-                [ text hello
-                ]
-            , div
-                []
-                [ text goodbye
-                ]
-            ]
+        div [] []
