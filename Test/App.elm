@@ -1,7 +1,34 @@
-module Test.App exposing (..)
+port module Test.App exposing (..)
 
-import Html exposing (div, text, Html)
 import StringUtils exposing (..)
+
+
+{- Remove when compiler bug is fixed -}
+
+import Json.Decode
+
+
+port exitApp : Float -> Cmd msg
+
+
+port externalStop : (() -> msg) -> Sub msg
+
+
+type alias Model =
+    {}
+
+
+main : Program Never Model Msg
+main =
+    Platform.program
+        { init = init
+        , update = (\_ -> always <| {} ! [])
+        , subscriptions = always Sub.none
+        }
+
+
+type Msg
+    = Nop
 
 
 (+--+) : a -> b -> String
@@ -9,8 +36,8 @@ import StringUtils exposing (..)
     concatWithSpaces 2
 
 
-main : Html a
-main =
+init : ( Model, Cmd Msg )
+init =
     let
         hello =
             "Hello World" +++ "!! " +++ " " +++ ( 1, 2 ) +++ " " +++ { x = [ 3, 4 ], y = "abc" }
@@ -32,4 +59,4 @@ main =
                 in
                     Debug.log "goodbye" goodbye
     in
-        div [] []
+        {} ! []
