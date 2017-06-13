@@ -1,12 +1,19 @@
-module StringUtils exposing ((+++), (+-+), concatWithSpaces)
+module StringUtils
+    exposing
+        ( (+++)
+        , (+-+)
+        , concatWithSpaces
+        , cleanElmString
+        )
 
 {-|
     Some String utils, e.g. better concat
 
-@docs (+++), (+-+), concatWithSpaces
+@docs (+++), (+-+), concatWithSpaces, cleanElmString
 -}
 
 import String
+import Regex exposing (..)
 import Native.StringUtils
 
 
@@ -38,6 +45,19 @@ import Native.StringUtils
 concatWithSpaces : Int -> a -> b -> String
 concatWithSpaces count a b =
     a +++ (String.repeat count " ") +++ b
+
+
+{-| clean Elm string of all the backslashes
+-}
+cleanElmString : String -> String
+cleanElmString string =
+    string
+        |> Regex.replace All (regex "\\\\") (always "")
+        |> Regex.replace All (regex "\\\\\"") (always "\"")
+
+
+
+-- HELPERS
 
 
 {-| test for string
