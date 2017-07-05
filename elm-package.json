@@ -1,5 +1,5 @@
 {
-    "version": "2.1.0",
+    "version": "2.1.1",
     "summary": "Some String utils, e.g. better concat",
     "repository": "https://github.com/panosoft/elm-string-utils.git",
     "license": "Unlicense",

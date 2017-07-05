@@ -52,8 +52,12 @@ concatWithSpaces count a b =
 cleanElmString : String -> String
 cleanElmString string =
     string
+        |> Regex.replace All (regex "\\\\n") (always "†n")
+        |> Regex.replace All (regex "\\\\t") (always "†t")
         |> Regex.replace All (regex "\\\\") (always "")
         |> Regex.replace All (regex "\\\\\"") (always "\"")
+        |> Regex.replace All (regex "†n") (always "\\n")
+        |> Regex.replace All (regex "†t") (always "\\t")
 
 
 

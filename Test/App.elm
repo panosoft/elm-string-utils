@@ -48,15 +48,11 @@ init =
         hello2 =
             "Hello World" +--+ "!! " +--+ ( 1, 2 ) +--+ { x = [ 3, 4 ], y = "abc" }
 
-        l =
-            let
-                ll =
-                    Debug.log "hello" hello
-            in
-                let
-                    lll =
-                        Debug.log "hello2" hello2
-                in
-                    Debug.log "goodbye" goodbye
+        uglyElmString =
+            "\\\"\t\n"
     in
-        {} ! []
+        Debug.log "hello" hello
+            |> (\_ -> Debug.log "hello2" hello2)
+            |> (\_ -> Debug.log "goodbye" goodbye)
+            |> (\_ -> Debug.log (cleanElmString uglyElmString) uglyElmString)
+            |> (always ({} ! []))
